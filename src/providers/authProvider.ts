@@ -23,8 +23,8 @@ export const authProvider: AuthProvider = {
 
             if (response.ok) {
                 const data = await response.json();
-                // Assuming the backend returns { access_token: "..." }
-                localStorage.setItem(TOKEN_KEY, data.access_token);
+                // Backend returns { token: "..." }
+                localStorage.setItem(TOKEN_KEY, data.token);
                 return {
                     success: true,
                     redirectTo: "/",

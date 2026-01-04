@@ -31,9 +31,13 @@ export const dataProvider: DataProvider = {
     getList: async ({ resource, pagination, sorters, filters }) => {
         const params = new URLSearchParams();
 
-        if (pagination) {
+        if (pagination && pagination.mode !== "client") {
             params.append("page", (pagination.currentPage || 1).toString());
             params.append("limit", (pagination.pageSize || 10).toString());
+        } else {
+            // Client-side mode or no pagination: Fetch all (limit=1000 safe upper bound for now)
+            params.append("page", "1");
+            params.append("limit", "1000");
         }
 
         // Note: Backend currently might not support sorting/filtering but we send them for future compatibility

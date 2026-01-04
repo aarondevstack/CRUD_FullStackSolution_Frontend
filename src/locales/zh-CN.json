@@ -1,14 +1,46 @@
 {
+    "dashboard": {
+        "title": "仪表盘"
+    },
     "pages": {
         "login": {
+            "signin": "登录",
             "title": "登录",
             "username": "用户名",
             "password": "密码",
-            "submit": "登录",
-            "rememberMe": "记住我"
+            "buttons": {
+                "submit": "登录",
+                "rememberMe": "记住我",
+                "forgotPassword": "忘记密码?",
+                "noAccount": "没有账号? 注册"
+            },
+            "fields": {
+                "username": "用户名",
+                "password": "密码",
+                "username.required": "请输入用户名",
+                "password.required": "请输入密码"
+            }
         },
         "dashboard": {
             "title": "Go + Refine + AI: 2026年终极一人全栈开发。"
+        },
+        "users": {
+            "fields": {
+                "username": "用户名",
+                "email": "邮箱",
+                "role": "角色"
+            }
+        },
+        "blogs": {
+            "fields": {
+                "title": "标题",
+                "content": "内容"
+            }
+        },
+        "comments": {
+            "fields": {
+                "content": "内容"
+            }
         }
     },
     "buttons": {
@@ -20,12 +52,30 @@
         "logout": "登出"
     },
     "users": {
-        "users": "用户列表"
+        "users": "用户列表",
+        "titles": {
+            "list": "用户列表",
+            "create": "创建用户",
+            "edit": "编辑用户",
+            "show": "用户详情"
+        }
     },
     "blogs": {
-        "blogs": "博客列表"
+        "blogs": "博客列表",
+        "titles": {
+            "list": "博客列表",
+            "create": "创建博客",
+            "edit": "编辑博客",
+            "show": "博客详情"
+        }
     },
     "comments": {
-        "comments": "评论列表"
+        "comments": "评论列表",
+        "titles": {
+            "list": "评论列表",
+            "create": "创建评论",
+            "edit": "编辑评论",
+            "show": "评论详情"
+        }
     }
 }

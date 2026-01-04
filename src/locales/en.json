@@ -1,31 +1,81 @@
 {
+  "dashboard": {
+    "title": "Dashboard"
+  },
   "pages": {
     "login": {
+      "signin": "Sign in",
       "title": "Login",
       "username": "Username",
       "password": "Password",
-      "submit": "Sign in",
-      "rememberMe": "Remember me"
+      "buttons": {
+        "submit": "Sign In",
+        "rememberMe": "Remember me",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don't have an account? Sign Up"
+      },
+      "fields": {
+        "username": "Username",
+        "password": "Password",
+        "username.required": "Username is required",
+        "password.required": "Password is required"
+      }
     },
     "dashboard": {
       "title": "Go + Refine + AI: The ultimate 1-man stack for 2026."
+    },
+    "users": {
+      "fields": {
+        "username": "Username",
+        "email": "Email",
+        "role": "Role"
+      }
+    },
+    "blogs": {
+      "fields": {
+        "title": "Title",
+        "content": "Content"
+      }
+    },
+    "comments": {
+      "fields": {
+        "content": "Content"
+      }
     }
   },
   "buttons": {
-      "create": "Create",
-      "edit": "Edit",
-      "delete": "Delete",
-      "save": "Save",
-      "cancel": "Cancel",
-      "logout": "Logout"
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "logout": "Logout"
   },
   "users": {
-      "users": "Users"
+    "users": "Users",
+    "titles": {
+      "list": "Users List",
+      "create": "Create User",
+      "edit": "Edit User",
+      "show": "User Details"
+    }
   },
   "blogs": {
-      "blogs": "Blogs"
+    "blogs": "Blogs",
+    "titles": {
+      "list": "Blogs List",
+      "create": "Create Blog",
+      "edit": "Edit Blog",
+      "show": "Blog Details"
+    }
   },
   "comments": {
-      "comments": "Comments"
+    "comments": "Comments",
+    "titles": {
+      "list": "Comments List",
+      "create": "Create Comment",
+      "edit": "Edit Comment",
+      "show": "Comment Details"
+    }
   }
 }

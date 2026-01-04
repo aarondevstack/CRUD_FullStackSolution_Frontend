@@ -57,10 +57,6 @@ function App() {
                 routerProvider={routerProvider}
                 resources={[
                   {
-                    name: "dashboard",
-                    list: "/",
-                  },
-                  {
                     name: "users",
                     list: "/users",
                     create: "/users/create",

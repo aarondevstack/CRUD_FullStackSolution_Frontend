@@ -1,10 +1,20 @@
 import { List, useDataGrid, DateField } from "@refinedev/mui";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
+import { zhCN, enUS } from "@mui/x-data-grid/locales";
 
 export const UserList = () => {
-    const { t } = useTranslation();
-    const { dataGridProps } = useDataGrid();
+    const { t, i18n } = useTranslation();
+    const { dataGridProps } = useDataGrid({
+        pagination: { mode: "off" },
+        filters: { mode: "off" },
+        sorters: { mode: "off" },
+        syncWithLocation: true,
+    });
+
+    const localeText = i18n.language === "zh-CN"
+        ? zhCN.components.MuiDataGrid.defaultProps.localeText
+        : enUS.components.MuiDataGrid.defaultProps.localeText;
 
     const columns: GridColDef[] = [
         { field: "id", headerName: "ID", type: "number", width: 70 },
@@ -23,7 +33,12 @@ export const UserList = () => {
 
     return (
         <List>
-            <DataGrid {...dataGridProps} columns={columns} autoHeight />
+            <DataGrid
+                {...dataGridProps}
+                columns={columns}
+                autoHeight
+                localeText={localeText}
+            />
         </List>
     );
 };
