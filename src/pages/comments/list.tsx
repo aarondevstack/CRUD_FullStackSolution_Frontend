@@ -1,4 +1,4 @@
-import { List, useDataGrid, DateField, MarkdownField } from "@refinedev/mui";
+import { List, useDataGrid, DateField, MarkdownField, EditButton, ShowButton, DeleteButton } from "@refinedev/mui";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 import { zhCN, enUS } from "@mui/x-data-grid/locales";
@@ -6,7 +6,7 @@ import { zhCN, enUS } from "@mui/x-data-grid/locales";
 export const CommentList = () => {
     const { t, i18n } = useTranslation();
     const { dataGridProps } = useDataGrid({
-        pagination: { mode: "off" },
+        // pagination: { mode: "off" },
         filters: { mode: "off" },
         sorters: { mode: "off" },
         syncWithLocation: true,
@@ -17,17 +17,28 @@ export const CommentList = () => {
         : enUS.components.MuiDataGrid.defaultProps.localeText;
 
     const columns: GridColDef[] = [
-        { field: "id", headerName: "ID", type: "number", width: 70 },
         {
-            field: "content",
-            headerName: "Content",
-            flex: 1,
+            field: "actions",
+            headerName: t("table.actions"),
+            sortable: false,
+            filterable: false,
             renderCell: function (params) {
-                return <MarkdownField value={params.value?.slice(0, 80) + "..."} />;
-            }
+                return (
+                    <>
+                        <EditButton hideText recordItemId={params.row.id} />
+                        <ShowButton hideText recordItemId={params.row.id} />
+                        <DeleteButton hideText recordItemId={params.row.id} />
+                    </>
+                );
+            },
+            align: "center",
+            headerAlign: "center",
+            minWidth: 120,
         },
-        { field: "post_id", headerName: "Blog ID", type: "number", width: 100 },
+        { field: "id", headerName: "ID", type: "number", width: 70 },
+        { field: "content", headerName: t("pages.comments.fields.content", "Content"), flex: 1 },
         { field: "user_id", headerName: "User ID", type: "number", width: 100 },
+        { field: "blog_id", headerName: "Blog ID", type: "number", width: 100 },
         {
             field: "created_at",
             headerName: "Created At",

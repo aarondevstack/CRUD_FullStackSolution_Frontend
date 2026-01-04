@@ -24,6 +24,11 @@ const fetcher = async (url: string, options?: RequestInit) => {
         return Promise.reject(error);
     }
 
+
+    if (response.status === 204) {
+        return {};
+    }
+
     return response.json();
 };
 
@@ -55,15 +60,12 @@ export const dataProvider: DataProvider = {
         }
 
         const url = `/${resource}?${params.toString()}`;
-        const data = await fetcher(url);
+        const response = await fetcher(url);
 
-        // Backend doesn't return Total count in header or body currently for all endpoints.
-        // We might need to assume a high number or fix backend.
-        // For now assuming data is an array.
-
+        // Backend returns pagination response with { data: [], total: number }
         return {
-            data,
-            total: data.length, // Limitation: Pagination won't work correctly without total count from backend
+            data: response.data,
+            total: response.total,
         };
     },
 

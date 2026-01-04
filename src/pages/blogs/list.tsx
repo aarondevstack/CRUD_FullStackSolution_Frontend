@@ -1,4 +1,4 @@
-import { List, useDataGrid, DateField, MarkdownField } from "@refinedev/mui";
+import { List, useDataGrid, DateField, MarkdownField, EditButton, ShowButton, DeleteButton } from "@refinedev/mui";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 import { zhCN, enUS } from "@mui/x-data-grid/locales";
@@ -17,6 +17,24 @@ export const BlogList = () => {
         : enUS.components.MuiDataGrid.defaultProps.localeText;
 
     const columns: GridColDef[] = [
+        {
+            field: "actions",
+            headerName: t("table.actions"),
+            sortable: false,
+            filterable: false,
+            renderCell: function (params) {
+                return (
+                    <>
+                        <EditButton hideText recordItemId={params.row.id} />
+                        <ShowButton hideText recordItemId={params.row.id} />
+                        <DeleteButton hideText recordItemId={params.row.id} />
+                    </>
+                );
+            },
+            align: "center",
+            headerAlign: "center",
+            minWidth: 120,
+        },
         { field: "id", headerName: "ID", type: "number", width: 70 },
         { field: "title", headerName: t("pages.blogs.fields.title", "Title"), flex: 1 },
         {

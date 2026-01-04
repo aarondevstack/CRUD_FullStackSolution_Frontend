@@ -1,4 +1,5 @@
 import type { AccessControlProvider } from "@refinedev/core";
+import { jwtDecode } from "jwt-decode";
 
 export const accessControlProvider: AccessControlProvider = {
     can: async ({ resource, action, params }) => {
@@ -16,13 +17,15 @@ export const accessControlProvider: AccessControlProvider = {
         const token = localStorage.getItem("refine-auth");
         if (!token) return { can: false };
 
-        let userRole = "user"; // Default
+        let userRole = "user";
         try {
-            const payload = JSON.parse(atob(token.split('.')[1]));
-            userRole = payload.role || "user";
+            const decoded = jwtDecode<{ role: string }>(token);
+            userRole = decoded.role || "user";
         } catch (e) {
-            // invalid token
+            console.error("Token decode failed", e);
         }
+
+        console.log("AccessControl Check:", { resource, action, userRole });
 
         if (userRole === "admin") {
             return { can: true };
