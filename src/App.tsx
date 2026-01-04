@@ -1,4 +1,4 @@
-import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -17,31 +17,31 @@ import routerProvider, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
-import dataProvider from "@refinedev/simple-rest";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-import { authProvider } from "./authProvider";
+import { authProvider } from "./providers/authProvider";
+import { dataProvider } from "./providers/dataProvider";
+import { accessControlProvider } from "./providers/accessControlProvider";
+import { i18nProvider } from "./providers/i18nProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
-import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
-import { Register } from "./pages/register";
+import { Dashboard } from "./pages/dashboard";
+import { UserList } from "./pages/users/list";
+import { UserCreate } from "./pages/users/create";
+import { UserEdit } from "./pages/users/edit";
+import { UserShow } from "./pages/users/show";
+import { BlogList } from "./pages/blogs/list";
+import { BlogCreate } from "./pages/blogs/create";
+import { BlogEdit } from "./pages/blogs/edit";
+import { BlogShow } from "./pages/blogs/show";
+import { CommentList } from "./pages/comments/list";
+import { CommentCreate } from "./pages/comments/create";
+import { CommentEdit } from "./pages/comments/edit";
+import { CommentShow } from "./pages/comments/show";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -49,27 +49,43 @@ function App() {
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={dataProvider}
+                authProvider={authProvider}
+                accessControlProvider={accessControlProvider}
+                i18nProvider={i18nProvider}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
-                authProvider={authProvider}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    name: "dashboard",
+                    list: "/",
+                  },
+                  {
+                    name: "users",
+                    list: "/users",
+                    create: "/users/create",
+                    edit: "/users/edit/:id",
+                    show: "/users/show/:id",
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    name: "blogs",
+                    list: "/blogs",
+                    create: "/blogs/create",
+                    edit: "/blogs/edit/:id",
+                    show: "/blogs/show/:id",
+                    meta: {
+                      canDelete: true,
+                    },
+                  },
+                  {
+                    name: "comments",
+                    list: "/comments",
+                    create: "/comments/create",
+                    edit: "/comments/edit/:id",
+                    show: "/comments/show/:id",
                     meta: {
                       canDelete: true,
                     },
@@ -88,28 +104,32 @@ function App() {
                         key="authenticated-inner"
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <ThemedLayout Header={() => <Header sticky />}>
+                        <ThemedLayout Header={Header}>
                           <Outlet />
                         </ThemedLayout>
                       </Authenticated>
                     }
                   >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+                    <Route index element={<Dashboard />} />
+                    <Route path="/users">
+                      <Route index element={<UserList />} />
+                      <Route path="create" element={<UserCreate />} />
+                      <Route path="edit/:id" element={<UserEdit />} />
+                      <Route path="show/:id" element={<UserShow />} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+                    <Route path="/blogs">
+                      <Route index element={<BlogList />} />
+                      <Route path="create" element={<BlogCreate />} />
+                      <Route path="edit/:id" element={<BlogEdit />} />
+                      <Route path="show/:id" element={<BlogShow />} />
                     </Route>
+                    <Route path="/comments">
+                      <Route index element={<CommentList />} />
+                      <Route path="create" element={<CommentCreate />} />
+                      <Route path="edit/:id" element={<CommentEdit />} />
+                      <Route path="show/:id" element={<CommentShow />} />
+                    </Route>
+
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                   <Route
@@ -123,11 +143,6 @@ function App() {
                     }
                   >
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                      path="/forgot-password"
-                      element={<ForgotPassword />}
-                    />
                   </Route>
                 </Routes>
 
