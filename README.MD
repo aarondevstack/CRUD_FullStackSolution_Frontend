@@ -1,61 +1,49 @@
-<div align="center" style="margin: 30px;">
-<a href="https://refine.dev/">
-  <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-</a>
+# CRUD Solution Frontend
 
-</br>
-</br>
+This is the frontend application for the CRUD Fullstack Solution, built with **Refine**, **Vite**, and **Material UI**. It provides a comprehensive admin panel for managing Users, Blogs, and Comments.
 
-<div align="center">
-    <a href="https://refine.dev">Home Page</a> |
-    <a href="https://discord.gg/refine">Discord</a> |
-    <a href="https://refine.dev/examples/">Examples</a> |
-    <a href="https://refine.dev/blog/">Blog</a> |
-    <a href="https://refine.dev/docs/">Documentation</a>
-</div>
-</div>
+## Features
 
-</br>
+- **Refine Framework**: Headless react-based framework for rapid internal tool development.
+- **Material UI**: Premium component library for a consistent and professional look.
+- **Resource Management**: flexible CRUD views for `users`, `blogs`, and `comments`.
+- **Authentication**: Integrated with the backend JWT authentication.
+- **RBAC Control**: UI elements adapt based on user roles (Admin vs User).
 
-<div align="center">Build your React-based internal tools, admin panels, dashboards, B2B apps with flexibility in mind.
-An open-source, headless React meta-framework, developed with a commitment to best practices, flexibility, minimal tech debt, and team alignment, could be a perfect fit for dynamic environments.
+## Prerequisites
 
-<br />
-<br />
+- **Node.js**: LTS version
+- **pnpm**: Package manager
 
-[![Discord](https://img.shields.io/discord/837692625737613362.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/refine)
-[![Twitter Follow](https://img.shields.io/twitter/follow/refine_dev?style=social)](https://twitter.com/refine_dev)
+## Getting Started
 
-</div>
-
-## Material UI Refine Example with Vite
-
-Refine has a built-in integration with [Material UI](https://mui.com/material-ui/getting-started/), and this example demonstrates how to use it.
-
-The example includes list, create, edit, and delete pages for the `posts` and `category` resources, as well as a functional login page and dark mode.
-
-For more information on how to use Material UI with Refine, please refer to the [Material UI integration guide](https://refine.dev/docs/ui-integrations/material-ui/introduction/).
-
-## Try this example on your local
+### 1. Install Dependencies
 
 ```bash
-npm create refine-app@latest -- --example with-material-ui-vite
+pnpm install
 ```
 
-## Try this example on CodeSandbox
+### 2. Run Development Server
 
-<br/>
+```bash
+pnpm dev
+```
 
-[![Open with-material-ui-vite example from Refine](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/embed/github/refinedev/refine/tree/main/examples/with-material-ui-vite?view=preview&theme=dark&codemirror=1)
+The application will start at `http://localhost:3000`. 
+API requests are proxied to the backend at `http://localhost:8888` to avoid CORS issues.
 
-## Screenshots
+### 3. Build for Production
 
-![Login](https://refine.ams3.cdn.digitaloceanspaces.com/example-readmes/with-material-ui-vite/login.png "Login")
+```bash
+pnpm build
+```
 
-<br />
+The output will be generated in the `dist/` directory.
 
-![Posts Page](https://refine.ams3.cdn.digitaloceanspaces.com/example-readmes/with-material-ui-vite/posts.png "Post")
+## Directory Structure
 
-<br />
+- `src/pages`: Feature pages (Login, Dashboard, User/Blog/Comment lists).
+- `src/components`: Reusable UI components.
+- `src/providers`: Refine data and auth providers.
+- `src/interfaces`: TypeScript interfaces shared with the backend DTOs.
 
-![Create Page](https://refine.ams3.cdn.digitaloceanspaces.com/example-readmes/with-material-ui-vite/create.png "Create")
